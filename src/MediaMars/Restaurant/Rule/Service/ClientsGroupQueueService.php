@@ -19,9 +19,10 @@ class ClientsGroupQueueService
             foreach ($groupQueue as $group) {
                 if ($group === $afterGroup) {
                     $startSearch = true;
+                    continue;
                 }
                 /** @var ClientsGroup $group */
-                if ($startSearch && $group !== $afterGroup && $group->size() < $afterGroup->size()) {
+                if ($startSearch && $group->size() < $afterGroup->size()) {
                     return $group;
                 }
             }
