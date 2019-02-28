@@ -32,8 +32,8 @@ class BigAndSmallClientsGroupRule extends AbstractTableRule
                 /** @var Table $table */
                 $clientsGroupRelation = $table->getClientsGroupRelation();
                 if ($clientsGroupRelation->isEmpty() && $table->size() >= $minSizeGroup->size()) {
-                    $clientsGroupRelation->add($minSizeGroup);
-                    $groupQueue->remove($minSizeGroup);
+
+                    $this->addGroupToTableFromQueue($table, $minSizeGroup, $groupQueue);
                     return false;
                 }
             }

@@ -2,6 +2,8 @@
 
 namespace MediaMars\Restaurant\Rule;
 
+use MediaMars\Restaurant\Data\ClientsGroup;
+use MediaMars\Restaurant\Data\Table;
 use MediaMars\Restaurant\DataStructure\ClientGroupQueueInterface;
 use MediaMars\Restaurant\DataStructure\TableListInterface;
 
@@ -36,4 +38,16 @@ abstract class AbstractTableRule  implements RuleInterface
      * @return bool
      */
     abstract protected function subApply(TableListInterface $tables, ClientGroupQueueInterface $groupQueue);
+
+    /**
+     * @param Table $table
+     * @param ClientsGroup $group
+     * @param ClientGroupQueueInterface $groupQueue
+     */
+    protected function addGroupToTableFromQueue(Table $table, ClientsGroup $group, ClientGroupQueueInterface $groupQueue)
+    {
+        $clientsGroupRelation = $table->getClientsGroupRelation();
+        $clientsGroupRelation->add($group);
+        $groupQueue->remove($group);
+    }
 }

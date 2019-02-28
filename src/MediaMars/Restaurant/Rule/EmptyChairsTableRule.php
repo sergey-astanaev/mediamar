@@ -18,8 +18,8 @@ class EmptyChairsTableRule extends AbstractTableRule
             /** @var Table $table */
             $clientsGroupRelation = $table->getClientsGroupRelation();
             if ($clientsGroupRelation->isEmpty() && $table->size() >= $group->size()) {
-                $clientsGroupRelation->add($group);
-                $groupQueue->remove($group);
+                $this->addGroupToTableFromQueue($table, $group, $groupQueue);
+
                 return false;
             }
         }

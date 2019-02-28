@@ -33,10 +33,10 @@ class ShareEmptyChairsForSmallClientsGroupRule extends AbstractTableRule
                 /** @var Table $table */
                 $clientsGroupRelation = $table->getClientsGroupRelation();
                 if (!$clientsGroupRelation->isEmpty()) {
-                    $emptyChairOfTable = $this->getEmptyChairOfTable($table, $minSizeGroup);
+                    $emptyChairOfTable = $this->getEmptyChairOfTable($table);
                     if ($emptyChairOfTable > 0 && $emptyChairOfTable >= $minSizeGroup->size()) {
-                        $clientsGroupRelation->add($minSizeGroup);
-                        $groupQueue->remove($minSizeGroup);
+                        $this->addGroupToTableFromQueue($table, $minSizeGroup, $groupQueue);
+
                         return false;
                     }
                 }
@@ -47,7 +47,11 @@ class ShareEmptyChairsForSmallClientsGroupRule extends AbstractTableRule
         return true;
     }
 
-    private function getEmptyChairOfTable(Table $table, ClientsGroup $group)
+    /**
+     * @param Table $table
+     * @return int
+     */
+    private function getEmptyChairOfTable(Table $table)
     {
         $tableSize = $table->size();
         $sumGroupSize = $table->getClientsGroupRelation()->size();

@@ -2,7 +2,6 @@
 
 namespace MediaMars\Restaurant\Data;
 
-
 class ClientsGroup
 {
     /**
