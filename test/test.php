@@ -125,7 +125,7 @@ $rule = new EmptyChairsTableRule(
 $dataProvider = [
     [
         'tables' => [
-            1, 2, 3, 4, 5, 6
+            2, 3, 4, 5, 6
         ],
         'arrived_groups' => [
             1 => 1,
@@ -145,7 +145,7 @@ $dataProvider = [
     ],
     [
         'tables' => [
-            1, 2, 3, 4, 5, 6
+            2, 3, 4, 5, 6
         ],
         'arrived_groups' => [
             6 => 6,
@@ -165,7 +165,7 @@ $dataProvider = [
     ],
     [
         'tables' => [
-            1, 2, 3, 4, 5, 6
+            2, 3, 4, 5, 6
         ],
         'arrived_groups' => [
             6 => 6,
@@ -185,7 +185,7 @@ $dataProvider = [
     ],
     [
         'tables' => [
-            1, 2, 3, 4, 5, 6
+            2, 3, 4, 5, 6
         ],
         'arrived_groups' => [
             6 => 6,
