@@ -1,1 +1,4 @@
 /vendor/
+/laptop/vendor/
+
+composer.lock
