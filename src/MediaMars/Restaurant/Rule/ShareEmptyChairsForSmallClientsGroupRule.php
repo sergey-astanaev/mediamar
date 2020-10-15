@@ -2,7 +2,6 @@
 
 namespace MediaMars\Restaurant\Rule;
 
-use MediaMars\Restaurant\Data\ClientsGroup;
 use MediaMars\Restaurant\Data\Table;
 use MediaMars\Restaurant\DataStructure\ClientGroupQueueInterface;
 use MediaMars\Restaurant\DataStructure\TableListInterface;
@@ -13,11 +12,11 @@ class ShareEmptyChairsForSmallClientsGroupRule extends AbstractTableRule
     /**
      * @var ClientsGroupQueueService
      */
-    private $searchMinGroupSize;
+    private $clientsGroupQueueService;
 
-    public function __construct(ClientsGroupQueueService $searchMinGroupSize, RuleInterface $nextRule = null)
+    public function __construct(ClientsGroupQueueService $clientsGroupQueueService, RuleInterface $nextRule = null)
     {
-        $this->searchMinGroupSize = $searchMinGroupSize;
+        $this->clientsGroupQueueService = $clientsGroupQueueService;
 
         parent::__construct($nextRule);
     }
@@ -42,7 +41,7 @@ class ShareEmptyChairsForSmallClientsGroupRule extends AbstractTableRule
                 }
             }
 
-        } while ($minSizeGroup = $this->searchMinGroupSize->getLessSizeGroupAfterGroup($groupQueue, $minSizeGroup));
+        } while ($minSizeGroup = $this->clientsGroupQueueService->getLessSizeGroupAfterGroup($groupQueue, $minSizeGroup));
 
         return true;
     }

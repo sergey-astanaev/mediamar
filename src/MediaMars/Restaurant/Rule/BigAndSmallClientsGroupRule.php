@@ -12,11 +12,11 @@ class BigAndSmallClientsGroupRule extends AbstractTableRule
     /**
      * @var ClientsGroupQueueService
      */
-    private $searchMinGroupSize;
+    private $clientsGroupQueueService;
 
-    public function __construct(ClientsGroupQueueService $searchMinGroupSize, RuleInterface $nextRule = null)
+    public function __construct(ClientsGroupQueueService $clientsGroupQueueService, RuleInterface $nextRule = null)
     {
-        $this->searchMinGroupSize = $searchMinGroupSize;
+        $this->clientsGroupQueueService = $clientsGroupQueueService;
 
         parent::__construct($nextRule);
     }
@@ -27,7 +27,7 @@ class BigAndSmallClientsGroupRule extends AbstractTableRule
     protected function subApply(TableListInterface $tables, ClientGroupQueueInterface $groupQueue)
     {
         $minSizeGroup = $groupQueue->get();
-        while ($minSizeGroup = $this->searchMinGroupSize->getLessSizeGroupAfterGroup($groupQueue, $minSizeGroup)) {
+        while ($minSizeGroup = $this->clientsGroupQueueService->getLessSizeGroupAfterGroup($groupQueue, $minSizeGroup)) {
             foreach ($tables as $table) {
                 /** @var Table $table */
                 $clientsGroupRelation = $table->getClientsGroupRelation();
